@@ -12,8 +12,9 @@ class TrafficLight {
     }
   }
 
-  setLightStatus(status){
+  updateLights(status){
     this._lightStatus = status;
+    this.getLightStatus();
   }
 
   getLightStatus() {
