@@ -40,12 +40,17 @@ class Intersection {
     })
   }
 
+  endCycle() {
+    clearInterval(this._timer);
+  }
+
   /* The intersection light cycle takes 2 minutes:
   * 1 minute Green East/West - Red North/South
   * 10 seconds Yellow East/West  - Red North South
   * 40 seconds Green North/South - Red East/West
   * 10 seconds Yellow North/South - Red East/West
   * Each Cycle we calculate the state for the elapsed time and notify our listeners
+  * (could notify only when state changes...)
   */
   runCycle(){
     this._cycleStart = Date.now();
@@ -109,7 +114,7 @@ class Intersection {
         this.updateNBSBLight(this._NBSBLight);
         this.updateEBWBLight(this._EBWBLight);
 
-      } else if (elapsed > 120) {
+      } else if (elapsed > this._cycleLength) {
         this._cycleStart = Date.now()
         this._NBSBLight = {
           greenLight: false,
