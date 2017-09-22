@@ -1,16 +1,16 @@
 const TrafficLight = require('./TrafficLight');
 const Intersection = require('./Intersection');
 
-let nb1 = new TrafficLight();
-let sb1 = new TrafficLight();
-let eb1 = new TrafficLight();
-let wb1 = new TrafficLight();
+let nb1 = new TrafficLight('Northbound Light');
+let sb1 = new TrafficLight('Southbound Light');
+let eb1 = new TrafficLight('Eastbound Light');
+let wb1 = new TrafficLight('Westbound Light');
 
-let waterAndThird = new Intersection();
+let firstAndMain = new Intersection();
 
-waterAndThird.registerNBSBObserver(nb1);
-waterAndThird.registerNBSBObserver(sb1);
-waterAndThird.registerEBWBObserver(eb1);
-waterAndThird.registerEBWBObserver(wb1);
+firstAndMain.registerNBSBObserver(nb1);
+firstAndMain.registerNBSBObserver(sb1);
+firstAndMain.registerEBWBObserver(eb1);
+firstAndMain.registerEBWBObserver(wb1);
 
-waterAndThird.runCycle();
+firstAndMain.runCycle();

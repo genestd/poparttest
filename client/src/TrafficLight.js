@@ -2,13 +2,15 @@ class TrafficLight {
 
   constructor(){
     if (arguments.length === 0) {
-      this._lightStatus = {
-        greenLight: false,
-        yellowLight: false,
-        redLight: false
-      }
+      this._name = 'TrafficLight'
     } else {
-      this._lightStatus = arguments[0];
+      this._name = arguments[0]
+    }
+    //default status = red
+    this._lightStatus = {
+      greenLight: false,
+      yellowLight: false,
+      redLight: true
     }
   }
 
@@ -18,7 +20,7 @@ class TrafficLight {
   }
 
   getLightStatus() {
-    return console.log(`Light status...Green: ${this._lightStatus.greenLight}, Yellow: ${this._lightStatus.yellowLight}, Red: ${this._lightStatus.redLight}`)
+    return console.log(`${this._name} status...Green: ${this._lightStatus.greenLight}, Yellow: ${this._lightStatus.yellowLight}, Red: ${this._lightStatus.redLight}`)
   }
 }
 

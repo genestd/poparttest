@@ -17,10 +17,13 @@ class Intersection {
     this._nbsbObservers = [];
     this._ebwbObservers = [];
   }
+
+  // Northbound - Southbound Observers
   registerNBSBObserver(obj) {
     this._nbsbObservers.push(obj);
   }
 
+  // Eastbound Westbound Observers
   registerEBWBObserver(obj) {
     this._ebwbObservers.push(obj);
   }
@@ -37,12 +40,20 @@ class Intersection {
     })
   }
 
+  /* The intersection light cycle takes 2 minutes:
+  * 1 minute Green East/West - Red North/South
+  * 10 seconds Yellow East/West  - Red North South
+  * 40 seconds Green North/South - Red East/West
+  * 10 seconds Yellow North/South - Red East/West
+  * Each Cycle we calculate the state for the elapsed time and notify our listeners
+  */
   runCycle(){
     this._cycleStart = Date.now();
     this._timer = setInterval( ()=>{
+
       const elapsed = Math.floor((Date.now() - this._cycleStart)/1000);
       console.log(`elapsed: ${elapsed}`)
-      if (elapsed >= 0 && elapsed <=10) {
+      if (elapsed >= 0 && elapsed <=60) {
         this._NBSBLight = {
           greenLight: false,
           yellowLight: false,
@@ -56,7 +67,7 @@ class Intersection {
         this.updateNBSBLight(this._NBSBLight);
         this.updateEBWBLight(this._EBWBLight);
 
-      } else if (elapsed >= 11 && elapsed <=70) {
+      } else if (elapsed >= 61 && elapsed <=70) {
         this._NBSBLight = {
           greenLight: false,
           yellowLight: false,
